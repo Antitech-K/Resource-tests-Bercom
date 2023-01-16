@@ -16,10 +16,7 @@ def measure():
     body = {}
     headers = {'content-type': 'application/json'}
     try:
-        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=60)
-        os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 128")
-        time.sleep(0.8)
-        os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0")        
+        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=60)       
         resault_post = measure_d.text
         print(measure_d.text)
         file = open ('./clipboard.txt', 'w')
@@ -66,12 +63,16 @@ time.sleep (6)
 a = 0
 while a != 50000:
     print("Запуск измерений.")
-    measure()
+    os.popen("./request_post.py")
+    os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 128")
+    time.sleep(0.8)
+    os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0") 
     time.sleep(3)
     status
     if  status.text == '{"result":"READY"}':
         file = open ('./clipboard.txt', 'r')
         resault_measure = file.read()
+        print (resault_measure)
         file.close()
         if resault_measure[19] != "2" or '3' or '4':
             print("Прибор не выдал требуемые результаты.")
