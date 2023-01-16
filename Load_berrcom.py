@@ -58,8 +58,8 @@ elif status.text == '{"result":"ONLINE"}':
 
 #включение "чайника"
 os.system("/opt/RODOS4/RODOS4 --id 4798 --c8 128")
-print ("нагрев включен, время ожинания около 3 мин")
-time.sleep (180)
+print ("нагрев включен, время ожинания около 1 мин")
+time.sleep (60)
 
 
 a = 0
