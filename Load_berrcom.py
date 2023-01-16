@@ -52,19 +52,16 @@ while a != 50000:
     print("Запуск измерений.")
     os.popen("./request_post_berrcom.py")
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 128")
-    time.sleep(0.8)
+    time.sleep(0.5)
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0")
     time.sleep(1)
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0") 
-    time.sleep(3)
+    time.sleep(30)
     status
-    print(status.text[11:16])
     if  status.text[11:16] == 'READY':
         file = open ('./clipboard.txt', 'r')
         resault_measure = file.read()
         file.close()
-        print(resault_measure[19])
-        print(type(resault_measure[19]))
         if resault_measure[19] == '2':
             resault()
         elif resault_measure[19] == '3':
