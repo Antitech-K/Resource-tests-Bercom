@@ -63,7 +63,7 @@ time.sleep (6)
 a = 0
 while a != 50000:
     print("Запуск измерений.")
-    os.popen("./request_post.py")
+    os.popen("./request_post_berrcom.py")
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 128")
     time.sleep(0.8)
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0") 
