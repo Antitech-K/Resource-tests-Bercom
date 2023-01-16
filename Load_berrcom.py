@@ -66,6 +66,8 @@ while a != 50000:
     os.popen("./request_post_berrcom.py")
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 128")
     time.sleep(0.8)
+    os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0")
+    time.sleep(1)
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0") 
     time.sleep(3)
     status
@@ -74,7 +76,8 @@ while a != 50000:
         file = open ('./clipboard.txt', 'r')
         resault_measure = file.read()
         file.close()
-        if resault_measure[19] != "2" or '3' or '4':
+        print(resault_measure[19])
+        if resault_measure[19] != '2' or '3' or '4':
             print("Прибор не выдал требуемые результаты.")
             file = open ('./error.txt', 'a')
             resault_measure = file.read()
