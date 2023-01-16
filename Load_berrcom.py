@@ -69,10 +69,12 @@ while a != 50000:
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0") 
     time.sleep(3)
     status
+    print(status)
+    print (resault_measure)
     if  status.text == '{"result":"READY"}':
         file = open ('./clipboard.txt', 'r')
         resault_measure = file.read()
-        print (resault_measure)
+        
         file.close()
         if resault_measure[19] != "2" or '3' or '4':
             print("Прибор не выдал требуемые результаты.")
