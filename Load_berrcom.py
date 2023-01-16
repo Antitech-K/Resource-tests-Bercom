@@ -3,7 +3,6 @@
 
 import os   
 import requests
-import json
 import time
 import logging                                                           
 
@@ -15,6 +14,18 @@ def shutdown_rodos():
         time.sleep(0.2)
         os.system(a)
     return "Усё"
+
+#функция подсчета результата
+def resault():
+    file = open ('./result.txt', 'r')
+    number = file.read()
+    file.close()
+    file = open ('./result.txt', 'w')
+    number = int (number) + 1
+    file.write(str (number))
+    file.close()
+    print("Кол-во измерений =", number)
+    return 
 
 #проверка подключения драйвер теста
 status = requests.get("http://localhost:3001/status")
@@ -54,20 +65,17 @@ while a != 50000:
         file.close()
         print(resault_measure[19])
         print(type(resault_measure[19]))
-        if resault_measure[19] != '2' or resault_measure[19] != '3' or resault_measure[19] != '4':
+        if resault_measure[19] == '2':
+            resault()
+        elif resault_measure[19] == '3'
+            resault()
+        elif resault_measure[19] == '4':
+            resault()
+        else:
             print("Прибор не выдал требуемые результаты.")
             file = open ('./error.txt', 'a')
-            resault_measure = file.read()
+            file.write(resault_measure)
             file.close()
-        elif resault_measure[19] == "2" or resault_measure[19] =='3' or resault_measure[19] =='4':
-            file = open ('./result.txt', 'r')
-            number = file.read()
-            file.close()
-            file = open ('./result.txt', 'w')
-            number = int (number) + 1
-            file.write(str (number))
-            file.close()
-            print("Кол-во измерений =", number)
     a += 1
 
 down_rele = os.system("/opt/RODOS4/RODOS4 --id 4798 --c8 0")
