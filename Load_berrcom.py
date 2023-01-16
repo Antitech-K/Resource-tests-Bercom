@@ -69,8 +69,7 @@ while a != 50000:
     os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0") 
     time.sleep(3)
     status
-    print(status)
-    print (resault_measure)
+    print(status.text)
     if  status.text == '{"result":"READY"}':
         file = open ('./clipboard.txt', 'r')
         resault_measure = file.read()
