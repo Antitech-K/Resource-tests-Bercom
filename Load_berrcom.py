@@ -8,7 +8,7 @@ import time
 import logging                                                           
 
 
-down_rele = os.system("/opt/RODOS4/RODOS4 --id 4798 --c8 0")
+
 
 def measure():
     resault_post= ''
@@ -16,9 +16,9 @@ def measure():
     body = {}
     headers = {'content-type': 'application/json'}
     try:
-        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=7)
+        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=10)
         os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 128")
-        time.sleep(1)
+        time.sleep(0.8)
         os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0")        
         resault_post = measure_d.text
         file = open ('./clipboard.txt', 'w')
@@ -28,7 +28,7 @@ def measure():
     
     except requests.exceptions.ReadTimeout:
         print ("Какие-то проблемы с прибором. Программа отменена.")
-        resault_post = 'error'
+        resault_post = 'errorTimeout'
         file = open ('./clipboard.txt', 'w')
         file.write(resault_post)
         file.close()
@@ -45,7 +45,7 @@ def shutdown_rodos():
 #проверка подключения драйвер теста
 status = requests.get("http://localhost:3001/status")
 if status.text =="":
-    down_rele
+    down_rele = os.system("/opt/RODOS4/RODOS4 --id 4798 --c8 0")
     print ("Не запущен тест-драйвер. Программа отменена.")
     exit()
 elif status.text == '{"result":"ONLINE"}':
@@ -66,18 +66,18 @@ a = 0
 while a != 50000:
     print("Запуск измерений.")
     measure()
-    time.sleep(1)
+    time.sleep(3)
     status
     if  status.text == '{"result":"READY"}':
         file = open ('./clipboard.txt', 'r')
         resault_measure = file.read()
         file.close()
-        if resault_measure.find('sys"') != 21:
+        if resault_measure[19] != "2" or '3' or '4':
             print("Прибор не выдал требуемые результаты.")
             file = open ('./error.txt', 'a')
             resault_measure = file.read()
             file.close()
-        elif resault_measure.find('sys"') == 21:
+        elif resault_measure[19] == "2" or '3' or '4':
             file = open ('./result.txt', 'r')
             number = file.read()
             file.close()
@@ -88,4 +88,6 @@ while a != 50000:
             print("Кол-во измерений =", number)
     a += 1
 
+down_rele = os.system("/opt/RODOS4/RODOS4 --id 4798 --c8 0")
+shutdown_rodos()
 exit()
