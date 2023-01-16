@@ -67,7 +67,7 @@ while a != 50000:
         print(type(resault_measure[19]))
         if resault_measure[19] == '2':
             resault()
-        elif resault_measure[19] == '3'
+        elif resault_measure[19] == '3':
             resault()
         elif resault_measure[19] == '4':
             resault()
