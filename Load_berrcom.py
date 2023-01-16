@@ -16,7 +16,7 @@ def measure():
     body = {}
     headers = {'content-type': 'application/json'}
     try:
-        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=10)
+        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=100)
         os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 128")
         time.sleep(0.8)
         os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0")        
