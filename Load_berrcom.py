@@ -16,11 +16,12 @@ def measure():
     body = {}
     headers = {'content-type': 'application/json'}
     try:
-        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=100)
+        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=60)
         os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 128")
         time.sleep(0.8)
         os.system("/opt/RODOS4/RODOS4 --id 4798 --c9 0")        
         resault_post = measure_d.text
+        print(measure_d.text)
         file = open ('./clipboard.txt', 'w')
         file.write(resault_post)
         file.close()
