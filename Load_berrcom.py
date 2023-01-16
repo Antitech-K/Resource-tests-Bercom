@@ -7,31 +7,7 @@ import json
 import time
 import logging                                                           
 
-
-
-
-def measure():
-    resault_post= ''
-    url = 'http://localhost:3001/measure'
-    body = {}
-    headers = {'content-type': 'application/json'}
-    try:
-        measure_d = requests.post(url, data=json.dumps(body), headers=headers, timeout=60)       
-        resault_post = measure_d.text
-        print(measure_d.text)
-        file = open ('./clipboard.txt', 'w')
-        file.write(resault_post)
-        file.close()
-        return
-    
-    except requests.exceptions.ReadTimeout:
-        print ("Какие-то проблемы с прибором. Программа отменена.")
-        resault_post = 'errorTimeout'
-        file = open ('./clipboard.txt', 'w')
-        file.write(resault_post)
-        file.close()
-        return
-        
+      
 
 def shutdown_rodos():
     for x in range(16):
@@ -77,6 +53,7 @@ while a != 50000:
         resault_measure = file.read()
         file.close()
         print(resault_measure[19])
+        print(type(resault_measure[19]))
         if resault_measure[19] != '2' or '3' or '4':
             print("Прибор не выдал требуемые результаты.")
             file = open ('./error.txt', 'a')
