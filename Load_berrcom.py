@@ -54,12 +54,12 @@ while a != 50000:
         file.close()
         print(resault_measure[19])
         print(type(resault_measure[19]))
-        if resault_measure[19] != '2' or '3' or '4':
+        if resault_measure[19] != '2' or resault_measure[19] != '3' or resault_measure[19] != '4':
             print("Прибор не выдал требуемые результаты.")
             file = open ('./error.txt', 'a')
             resault_measure = file.read()
             file.close()
-        elif resault_measure[19] == "2" or '3' or '4':
+        elif resault_measure[19] == "2" or resault_measure[19] =='3' or resault_measure[19] =='4':
             file = open ('./result.txt', 'r')
             number = file.read()
             file.close()
